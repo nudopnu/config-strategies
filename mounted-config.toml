@@ -1,0 +1,11 @@
+[server]
+host = "MOUNTED"
+port = 5555
+
+[database]
+host = "MOUNTED"
+port = 5555
+dbname = "MOUNTED"
+
+[runtime]
+runtime_setup = "MOUNTED"

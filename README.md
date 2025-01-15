@@ -8,7 +8,7 @@ Here are some opinionated reference implementations for configuration management
 The implementation details are a matter of taste, here are the chosen options:
 
 - using `.toml` files for configuration as balance between simplicity and expressiveness
-- using an override config file in a seperate folder for easier mounts
+- using an override config file with an `-override` suffix
 - precedence for environment variables over all config files
 - prefixed environment variables in SCREAMING_SNAKE_CASE
 
@@ -16,12 +16,24 @@ The implementation details are a matter of taste, here are the chosen options:
 The Golang version uses [Viper](https://github.com/spf13/viper) to load the config files.
 
 ```bash
-# Default config
-docker build -t golang_image golang && docker run --rm golang_image
+# Build the golang image
+docker build -t golang_image golang
 
-# Mounted override file
-docker build -t golang_image golang && docker run --rm golang_image
+# Run with default config
+docker run --rm golang_image
 
-# Overriding environment variables
+# Run with a mounted override file
+MSYS_NO_PATHCONV=1 docker run --rm \
+    -v "$(pwd)/mounted-config.toml:/app/config-override/config.toml" \
+    golang_image
 
+# Run with overriding environment variables
+docker run --rm \
+    -e APP_SERVER_HOST="ENVIRONMENT" \
+    -e APP_SERVER_PORT="3333" \
+    -e APP_DATABASE_HOST="ENVIRONMENT" \
+    -e APP_DATABASE_PORT="3333" \
+    -e APP_DATABASE_DBNAME="ENVIRONMENT" \
+    -e APP_RUNTIME_RUNTIME_SETUP="ENVIRONMENT" \
+    golang_image
 ```

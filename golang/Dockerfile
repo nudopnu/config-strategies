@@ -14,7 +14,6 @@ RUN --mount=type=cache,target=/go/pkg/mod/ \
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/binary .
-COPY config.toml .
-COPY config-override/config.toml ./config-override/config.toml
+COPY config*.toml .
 EXPOSE 8080
 CMD ["./binary"]
