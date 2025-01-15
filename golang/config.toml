@@ -1,0 +1,11 @@
+[server]
+host = "localhost"
+port = 8081
+
+[database]
+host = "localhost"
+port = 5432
+dbname = "DATA"
+
+[runtime]
+runtime_setup = "debug"
