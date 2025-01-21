@@ -1,17 +1,18 @@
-# Configuration loading strategies
+# Configuration loading strategies ⚙️
 
-Here are some opinionated reference implementations for configuration management in containers. The idea is that an app running in a container should read its configuration from three-fold:
+Here are some opinionated reference implementations for configuration management in containers. The idea is that an app running in a container should read its configuration from the following:
 
-1. A default conifg file
+1. A default config file
 2. An overriding config file
 3. Overriding environment variables
+4. Secrets via environment variables or separate files specified by environment variables
 
 The implementation details are a matter of taste, here are the chosen options:
 
 - using `.toml` files for configuration as balance between simplicity and expressiveness
 - using an override config file with an `-override` suffix
-- precedence for environment variables over all config files
-- prefixed environment variables in SCREAMING_SNAKE_CASE
+- precedence for environment variables over all config files (and secret files)
+- prefixed environment variables in `SCREAMING_SNAKE_CASE`
 - allowing sensitive configs (secrets) only via environment variables or as separate files that have to be specified
 - when providing a secret via a file, the corresponding environment variable is suffixed by `_FILE` (e.g. `APP_DATABASE_PASSWORD_FILE` containing the database password)
 
