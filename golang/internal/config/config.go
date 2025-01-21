@@ -42,7 +42,7 @@ func LoadConfig() (config *Config, err error) {
 
 	viper.SetConfigFile("config.toml")
 	viper.MergeInConfig()
-	viper.SetConfigFile("config-override/config.toml")
+	viper.SetConfigFile("config-override.toml")
 	viper.MergeInConfig()
 
 	config = &Config{}
