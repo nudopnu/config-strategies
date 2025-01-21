@@ -1,0 +1,19 @@
+services:
+
+  golang:
+    image: golang_image
+    environment:
+      APP_SERVER_JWT_SECRET_FILE: /run/secrets/jwt_secret
+      APP_DATABASE_PASSWORD_FILE: /run/secrets/database_password
+    command: >
+      sh -c './binary && sleep infinity'
+    secrets:
+    - jwt_secret
+    - database_password
+
+secrets:
+
+  jwt_secret:
+    external: true
+  database_password:
+    external: true

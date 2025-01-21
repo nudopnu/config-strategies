@@ -1,0 +1,7 @@
+services:
+
+  golang:
+    build: golang
+    environment:
+      APP_SERVER_JWT_SECRET: ${JWT_SECRET?Provide a JWT_SECRET}
+      APP_DATABASE_PASSWORD: ${DATABASE_PASSWORD?Provide a DATABASE_PASSWORD}
